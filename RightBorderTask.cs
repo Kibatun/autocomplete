@@ -23,7 +23,7 @@ namespace Autocomplete
             {
                 if (string.Compare(prefix, phrases[i], StringComparison.OrdinalIgnoreCase) >= 0 
                     || phrases[i].StartsWith(prefix, StringComparison.OrdinalIgnoreCase))
-                    return i + 1;
+                    return i + 1; 
             }
             return 0;
         }
