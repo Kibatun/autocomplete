@@ -8,33 +8,20 @@ namespace Autocomplete
         public static string FindFirstByPrefix(IReadOnlyList<string> phrases, string prefix)
         {
             var index = LeftBorderTask.GetLeftBorderIndex(phrases, prefix, -1, phrases.Count) + 1;
-
-            if (index < phrases.Count
-                && phrases[index].StartsWith(prefix, StringComparison.OrdinalIgnoreCase))
-            {
+            if (index < phrases.Count && phrases[index].StartsWith(prefix, StringComparison.OrdinalIgnoreCase))
                 return phrases[index];
-            }
-            else
-            {
-                return null;
-            }
+            else return null;
         }
 
         public static string[] GetTopByPrefix(IReadOnlyList<string> phrases, string prefix, int count)
         {
             var phrasesCount = phrases.Count;
             var leftBorder = LeftBorderTask.GetLeftBorderIndex(phrases, prefix, -1, phrasesCount) + 1;
-
-            if (leftBorder == phrasesCount)
-            {
-                return new string[0];
-            }
-
             var actualCount = Math.Min(count, phrasesCount - leftBorder);
-
             var result = new List<string>();
             var nextPhraseIndex = 0;
-
+            if (leftBorder == phrasesCount)
+                return new string[0];
             for (var i = 0; i < actualCount; i++)
             {
                 nextPhraseIndex = leftBorder + i;
